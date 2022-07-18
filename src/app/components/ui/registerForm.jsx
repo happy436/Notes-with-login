@@ -89,6 +89,13 @@ const RegisterForm = () => {
                 error={errors.email}
             />
             <TextField
+                label="Name"
+                name="name"
+                value={data.name}
+                onChange={handleChange}
+                error={errors.name}
+            />
+            <TextField
                 label="Password"
                 type="password"
                 name="password"

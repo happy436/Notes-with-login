@@ -7,12 +7,13 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./components/common/protectedRoute";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/Header/Header";
+import Welcome from "./components/welcome";
 
 const App = () => {
     return (
         <div className={s.App}>
             <AppLoader>
-                    <Header />
+                <Header />
                 <Switch>
                     <ProtectedRoute
                         path="/main/:userId?/:edit?"
@@ -20,7 +21,7 @@ const App = () => {
                     />
                     <Route path="/login/:type?" component={Login} />
                     <Route path="/logout" component={LogOut} />
-                    <Route path="/" exact component={Header} />
+                    <Route path="/" exact component={Welcome} />
                     <Redirect to="/" />
                 </Switch>
                 <ToastContainer />
