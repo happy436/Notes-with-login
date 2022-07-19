@@ -51,7 +51,7 @@ const LoginForm = () => {
         if (!isValid) return;
         const redirect = history.location.state
             ? history.location.state.from.pathname
-            : "/";
+            : "/main";
         dispatch(logIn({ payload: data, redirect }));
     };
     return (
@@ -80,7 +80,7 @@ const LoginForm = () => {
             </CheckBoxField>
             {logInError && <p className="text-danger">{logInError}</p>}
             <button
-                className="btn btn-primary w-100 mx-auto"
+                className="btn bg-violet-400 hover:bg-violet-700 w-100 mx-auto"
                 type="submit"
                 disabled={!isValid}
             >

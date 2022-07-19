@@ -88,9 +88,7 @@ const createUserFailed = createAction("users/createUserFailed");
 const userUpdateRequested = createAction("users/userUpdateRequested");
 const userUpdateFailed = createAction("users/userUpdateFailed");
 
-export const logIn =
-    ({ payload, redirect }) =>
-    async (dispatch) => {
+export const logIn = ({ payload, redirect }) => async (dispatch) => {
         const { email, password } = payload;
         dispatch(authRequested());
         try {

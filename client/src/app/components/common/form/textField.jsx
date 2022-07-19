@@ -24,6 +24,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                     value={value}
                     onChange={handleChange}
                     className={getInputClasses()}
+                    autoComplete="off"
                 />
                 {type === "password" && (
                     <button

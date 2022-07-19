@@ -1,0 +1,14 @@
+.note__buttons-hover{
+    opacity: 0;
+}
+
+.note:hover .note__buttons-hover{
+    opacity:100;
+    transition: .5s;
+}
+
+@media (max-width:768px){
+    .note__buttons-hover{
+        opacity: 100;
+    }
+}

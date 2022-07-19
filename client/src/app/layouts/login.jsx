@@ -24,7 +24,7 @@ const Login = () => {
                             <RegisterForm />
                             <p>
                                 Already have account?{" "}
-                                <a role="button" onClick={toggleFormType}>
+                                <a role="button" onClick={toggleFormType} className="text-violet-600 hover:text-violet-400">
                                     {" "}
                                     Sign In
                                 </a>
@@ -36,7 +36,7 @@ const Login = () => {
                             <LoginForm />
                             <p>
                                 Dont have account?{" "}
-                                <a role="button" onClick={toggleFormType}>
+                                <a role="button" onClick={toggleFormType} className="text-violet-600 hover:text-violet-400">
                                     {" "}
                                     Sign Up
                                 </a>

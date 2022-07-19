@@ -17,7 +17,7 @@ const authService = {
         });
         return data;
     },
-    logIn: async ({ email, password }) => {
+    login: async ({ email, password }) => {
         const { data } = await httpAuth.post(`accounts:signInWithPassword`, {
             email,
             password,

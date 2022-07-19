@@ -104,7 +104,7 @@ const RegisterForm = () => {
                 error={errors.password}
             />
             <button
-                className="btn btn-primary w-100 mx-auto"
+                className="btn bg-violet-400 hover:bg-violet-700 w-100 mx-auto"
                 type="submit"
                 disabled={!isValid}
             >
