@@ -7,6 +7,8 @@ import { createStore } from "./app/store/createStore";
 import history from "./app/utils/history";
 import App from "./app/App";
 import { Provider } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const store = createStore();
 
@@ -16,6 +18,7 @@ ReactDOM.render(
             <Router history={history}>
                 <App />
             </Router>
+            <ToastContainer />
         </Provider>
     </React.StrictMode>,
     document.getElementById("root")

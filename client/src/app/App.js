@@ -5,9 +5,8 @@ import LogOut from "./layouts/logOut";
 import AppLoader from "./components/ui/hoc/appLoader";
 import { Redirect, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./components/common/protectedRoute";
-import { ToastContainer } from "react-toastify";
-import Header from "./components/Header/Header";
-import Content from "./components/pages/main/Content";
+import Header from "./components/header/header";
+import Content from "./components/pages/main/content";
 import Welcome from "./components/pages/welcome";
 
 const App = () => {
@@ -15,6 +14,7 @@ const App = () => {
         <div className={`${s.App} font-sans`}>
             <AppLoader>
                 <Header />
+                {/* <Content/> */}
                 <Switch>
                     <ProtectedRoute
                         path="/main/:userId?/:edit?"
@@ -25,7 +25,6 @@ const App = () => {
                     <Route path="/" exact component={Welcome} />
                     <Redirect to="/" />
                 </Switch>
-                <ToastContainer />
             </AppLoader>
         </div>
     );

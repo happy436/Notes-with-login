@@ -9,11 +9,7 @@ const RegisterForm = () => {
     const [data, setData] = useState({
         email: "",
         password: "",
-        profession: "",
-        sex: "male",
-        name: "",
-        qualities: [],
-        licence: false
+        name: ""
     });
 
     const [errors, setErrors] = useState({});
@@ -73,8 +69,7 @@ const RegisterForm = () => {
         const isValid = validate();
         if (!isValid) return;
         const newData = {
-            ...data,
-            qualities: data.qualities.map((q) => q.value)
+            ...data
         };
         dispatch(signUp(newData));
     };
