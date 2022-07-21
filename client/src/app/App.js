@@ -17,7 +17,7 @@ const App = () => {
                 {/* <Content/> */}
                 <Switch>
                     <ProtectedRoute
-                        path="/main/:userId?/:edit?"
+                        path="/main"
                         component={Content}
                     />
                     <Route path="/login/:type?" component={Login} />

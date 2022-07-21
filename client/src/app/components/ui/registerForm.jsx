@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
-import { useDispatch } from "react-redux";
-import { signUp } from "../../store/users";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuthErrors, signUp } from "../../store/users";
+import { toast } from "react-toastify";
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const RegisterForm = () => {
     });
 
     const [errors, setErrors] = useState({});
-
+    const authInError = useSelector(getAuthErrors());
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
@@ -72,6 +73,9 @@ const RegisterForm = () => {
             ...data
         };
         dispatch(signUp(newData));
+        if (authInError) {
+            toast.error(authInError);
+        }
     };
 
     return (

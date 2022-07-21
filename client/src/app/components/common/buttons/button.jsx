@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Button({ children, handleClick, type }) {
+function Button({ children, handleClick, type, className }) {
     return (
         <button
             type={type}
-            className="text-violet-600 hover:text-violet-800"
+            className={`text-violet-600 hover:text-violet-800 ${className}`}
             onClick={(e) => {
                 e.stopPropagation();
                 handleClick();
@@ -27,7 +27,8 @@ Button.propTypes = {
         PropTypes.node
     ]),
     handleClick: PropTypes.func,
-    type: PropTypes.string
+    type: PropTypes.string,
+    className: PropTypes.string
 };
 
 export default Button;

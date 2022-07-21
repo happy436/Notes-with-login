@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { getAuthErrors, logIn } from "../../store/users";
 import { useDispatch, useSelector } from "react-redux";
 import CheckBoxField from "./../common/form/checkBoxField";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
     const [data, setData] = useState({
@@ -53,6 +54,9 @@ const LoginForm = () => {
             ? history.location.state.from.pathname
             : "/main";
         dispatch(logIn({ payload: data, redirect }));
+        if (logInError) {
+            toast.error(logInError);
+        }
     };
     return (
         <form onSubmit={handleSubmit}>
@@ -78,7 +82,6 @@ const LoginForm = () => {
             >
                 Stay on
             </CheckBoxField>
-            {logInError && <p className="text-danger">{logInError}</p>}
             <button
                 className="btn bg-violet-400 hover:bg-violet-700 w-100 mx-auto"
                 type="submit"

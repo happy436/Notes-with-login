@@ -1,9 +1,3 @@
-const professionsMock = require("../mock/professions.json")
-const qualitiesMock = require("../mock/qualities.json")
-
-const Profession = require("../models/Profession")
-const Quality = require("../models/Quality")
-
 module.exports = async () => {
     const professions = await Profession.find()
     const qualities = await Quality.find()

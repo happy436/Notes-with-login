@@ -2,14 +2,9 @@ const { Schema, model } = require("mongoose");
 
 const schema = new Schema(
     {
-        content: {
+        note: {
             type: String,
             required: true,
-        },
-        pageId: {
-            type: Schema.Types.ObjectId,
-            ref: "User",
-            require: true,
         },
         userId: {
             type: Schema.Types.ObjectId,
