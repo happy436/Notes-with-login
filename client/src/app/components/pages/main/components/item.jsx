@@ -3,25 +3,19 @@ import PropTypes from "prop-types";
 import Button from "../../../common/buttons/button";
 import Edit from "../../../common/buttons/edit";
 import Delete from "../../../common/buttons/delete";
-import { useDispatch } from "react-redux";
-import { editData } from "../../../../store/notes";
 
-function Item({ data, onDelete, setModalActive, setActiveNote, setData }) {
+function Item({ data, onDelete, setModalActive, setActiveNote, onToggleCheched }) {
     const handleActiveModal = () => {
         setModalActive(true);
         setActiveNote({ note: data.note, ...data });
     };
-    const dispatch = useDispatch();
-    const handleCheched = (e) => {
-        e.stopPropagation();
-        setData((prev) => ({ ...prev, cheched: !prev.cheched }));
-        console.log(data);
-        dispatch(editData(data));
-    };
+
     return (
         <>
-            <span
-                className="min-w-[200px] break-words bg-violet-400 p-2 rounded-xl drop-shadow-lg note cursor-pointer truncate"
+            <li
+                className={`min-w-[200px] ${
+                    data.cheched ? "bg-violet-700" : "bg-violet-400"
+                } p-2 rounded-xl drop-shadow-lg note cursor-pointer truncate`}
                 onClick={() => {
                     handleActiveModal();
                 }}
@@ -30,7 +24,10 @@ function Item({ data, onDelete, setModalActive, setActiveNote, setData }) {
                     <input
                         type="checkbox"
                         className="w-[20px] h-[20px]"
-                        onClick={(e) => handleCheched(e)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onToggleCheched(data._id);
+                        }}
                     />
                     <span className="flex gap-2">
                         <Button
@@ -45,8 +42,14 @@ function Item({ data, onDelete, setModalActive, setActiveNote, setData }) {
                         </Button>
                     </span>
                 </span>
-                {data.note}
-            </span>
+                <span
+                    className={`break-words ${
+                        data.cheched ? "line-through" : null
+                    }`}
+                >
+                    {data.note}
+                </span>
+            </li>
         </>
     );
 }
@@ -56,7 +59,7 @@ Item.propTypes = {
     onDelete: PropTypes.func,
     setModalActive: PropTypes.func,
     setActiveNote: PropTypes.func,
-    setData: PropTypes.func
+    onToggleCheched: PropTypes.func
 };
 
 export default Item;

@@ -3,7 +3,8 @@ import {
     createNote,
     getNotes,
     loadNotesList,
-    removeNote
+    removeNote,
+    toggleChechedNoteStatus
 } from "../../../store/notes";
 import Button from "../../common/buttons/button";
 import Save from "../../common/buttons/save";
@@ -30,6 +31,9 @@ function Content() {
         setModalActive(false);
         dispatch(removeNote(id));
     };
+    const handleCheched = (id) => {
+        dispatch(toggleChechedNoteStatus(id));
+    };
     const list = useSelector(getNotes());
     return (
         <main className="flex flex-col justify-center content-center items-center gap-y-5">
@@ -48,7 +52,10 @@ function Content() {
                         name="note"
                         value={data.note || ""}
                         onChange={({ target }) => {
-                            setData(() => ({ [target.name]: target.value, cheched: false }));
+                            setData(() => ({
+                                [target.name]: target.value,
+                                cheched: false
+                            }));
                         }}
                     />
                 </form>
@@ -59,7 +66,7 @@ function Content() {
                 activeModal={activeModal}
                 setModalActive={setModalActive}
                 setActiveNote={setActiveNote}
-                setData={setData}
+                handleCheched={handleCheched}
             />
             <Modal
                 active={activeModal}

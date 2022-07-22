@@ -10,7 +10,6 @@ const Header = (props) => {
     const isLoggedIn = useSelector(getIsLoggedIn());
     const dispatch = useDispatch();
     const userData = useSelector(getUsersList());
-    console.log(userData);
     useEffect(() => {
         if (isLoggedIn) {
             dispatch(getCurrentUser());

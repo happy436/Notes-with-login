@@ -39,6 +39,12 @@ const notesSlice = createSlice({
                 (c) => c._id === action.payload._id
             );
             state.entities[index].note = action.payload.note;
+        },
+        editChechedStatusNote: (state, action) => {
+            const index = state.entities.findIndex(
+                (c) => c._id === action.payload
+            );
+            state.entities[index].cheched = !state.entities[index].cheched;
         }
     }
 });
@@ -50,7 +56,8 @@ const {
     notesRequestFailed,
     addNote,
     deleteNote,
-    editNote
+    editNote,
+    editChechedStatusNote
 } = actions;
 
 export const loadNotesList = () => async (dispatch) => {
@@ -80,13 +87,27 @@ export const createNote = (data) => async (dispatch) => {
     }
 };
 
+export const toggleChechedNoteStatus = (payload) => async (dispatch, getState) => {
+    dispatch(notesRequested());
+    try {
+        dispatch(editChechedStatusNote(payload));
+        const cheched = getState().notes.entities.find(item => item._id === payload);
+        const { content } = await notesService.update(cheched);
+        if (typeof content !== "object") {
+            return null;
+        }
+    } catch (error) {
+        dispatch(notesRequestFailed(error.message));
+    }
+};
+
 export const editData = (payload) => async (dispatch) => {
     dispatch(notesRequested());
     try {
-        /* const { content } = await notesService.update(payload);
+        const { content } = await notesService.update(payload);
         if (typeof content === "object") {
             toast.success("Note edit successful");
-        } */
+        }
         dispatch(editNote(payload));
     } catch (error) {
         dispatch(notesRequestFailed(error.message));
