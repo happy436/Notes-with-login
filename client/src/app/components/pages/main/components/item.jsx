@@ -3,12 +3,20 @@ import PropTypes from "prop-types";
 import Button from "../../../common/buttons/button";
 import Edit from "../../../common/buttons/edit";
 import Delete from "../../../common/buttons/delete";
+import { useDispatch } from "react-redux";
+import { editData } from "../../../../store/notes";
 
-function Item({ data, onDelete, setModalActive, setActiveNote }) {
-    const { note } = data;
+function Item({ data, onDelete, setModalActive, setActiveNote, setData }) {
     const handleActiveModal = () => {
         setModalActive(true);
-        setActiveNote({ note, ...data });
+        setActiveNote({ note: data.note, ...data });
+    };
+    const dispatch = useDispatch();
+    const handleCheched = (e) => {
+        e.stopPropagation();
+        setData((prev) => ({ ...prev, cheched: !prev.cheched }));
+        console.log(data);
+        dispatch(editData(data));
     };
     return (
         <>
@@ -22,7 +30,7 @@ function Item({ data, onDelete, setModalActive, setActiveNote }) {
                     <input
                         type="checkbox"
                         className="w-[20px] h-[20px]"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => handleCheched(e)}
                     />
                     <span className="flex gap-2">
                         <Button
@@ -37,7 +45,7 @@ function Item({ data, onDelete, setModalActive, setActiveNote }) {
                         </Button>
                     </span>
                 </span>
-                {note}
+                {data.note}
             </span>
         </>
     );
@@ -47,7 +55,8 @@ Item.propTypes = {
     data: PropTypes.object,
     onDelete: PropTypes.func,
     setModalActive: PropTypes.func,
-    setActiveNote: PropTypes.func
+    setActiveNote: PropTypes.func,
+    setData: PropTypes.func
 };
 
 export default Item;

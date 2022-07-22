@@ -48,7 +48,7 @@ function Content() {
                         name="note"
                         value={data.note || ""}
                         onChange={({ target }) => {
-                            setData(() => ({ [target.name]: target.value }));
+                            setData(() => ({ [target.name]: target.value, cheched: false }));
                         }}
                     />
                 </form>
@@ -59,6 +59,7 @@ function Content() {
                 activeModal={activeModal}
                 setModalActive={setModalActive}
                 setActiveNote={setActiveNote}
+                setData={setData}
             />
             <Modal
                 active={activeModal}

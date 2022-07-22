@@ -9,8 +9,7 @@ const notesSlice = createSlice({
     initialState: {
         entities: null,
         isLoading: true,
-        error: null,
-        id: []
+        error: null
     },
     reducers: {
         notesRequested: (state) => {
@@ -84,10 +83,10 @@ export const createNote = (data) => async (dispatch) => {
 export const editData = (payload) => async (dispatch) => {
     dispatch(notesRequested());
     try {
-        const { content } = await notesService.update(payload);
+        /* const { content } = await notesService.update(payload);
         if (typeof content === "object") {
             toast.success("Note edit successful");
-        }
+        } */
         dispatch(editNote(payload));
     } catch (error) {
         dispatch(notesRequestFailed(error.message));

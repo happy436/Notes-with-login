@@ -16,7 +16,7 @@ const App = () => {
     return (
         <div className={`${s.App} font-sans`}>
             <AppLoader>
-                <Header />
+                <Header/>
                 <Switch>
                     <ProtectedRoute path="/main" component={Content} />
                     <Route path="/login/:type?" component={Login} />
