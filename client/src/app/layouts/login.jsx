@@ -4,7 +4,7 @@ import LoginForm from "../components/ui/loginForm";
 import RegisterForm from "../components/ui/registerForm";
 
 const Login = () => {
-    const { type } = useParams();
+    const { type } = useParams("login");
     const [formType, setFormType] = useState(
         type === "register" ? type : "login"
     );
