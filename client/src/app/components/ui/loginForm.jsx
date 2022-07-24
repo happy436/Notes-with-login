@@ -55,7 +55,7 @@ const LoginForm = () => {
             : "/main";
         dispatch(logIn({ payload: data, redirect }));
         if (logInError) {
-            toast.error(logInError);
+            toast.error(logInError, { autoClose: 2000 });
         }
     };
     return (

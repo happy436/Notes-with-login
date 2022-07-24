@@ -74,7 +74,7 @@ const RegisterForm = () => {
         };
         dispatch(signUp(newData));
         if (authInError) {
-            toast.error(authInError);
+            toast.error(authInError, { autoClose: 2000 });
         }
     };
 

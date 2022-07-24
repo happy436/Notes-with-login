@@ -25,9 +25,9 @@ function Content() {
         e.preventDefault();
         dispatch(createNote(data));
         dispatch(loadNotesList());
+        setData({});
     };
     const handleDelete = (id) => {
-        console.log(id);
         setModalActive(false);
         dispatch(removeNote(id));
     };

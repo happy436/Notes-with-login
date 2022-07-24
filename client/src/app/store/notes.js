@@ -87,26 +87,29 @@ export const createNote = (data) => async (dispatch) => {
     }
 };
 
-export const toggleChechedNoteStatus = (payload) => async (dispatch, getState) => {
-    dispatch(notesRequested());
-    try {
-        dispatch(editChechedStatusNote(payload));
-        const cheched = getState().notes.entities.find(item => item._id === payload);
-        const { content } = await notesService.update(cheched);
-        if (typeof content !== "object") {
-            return null;
+export const toggleChechedNoteStatus =
+    (payload) => async (dispatch, getState) => {
+        dispatch(notesRequested());
+        try {
+            dispatch(editChechedStatusNote(payload));
+            const cheched = getState().notes.entities.find(
+                (item) => item._id === payload
+            );
+            const { content } = await notesService.update(cheched);
+            if (typeof content !== "object") {
+                return null;
+            }
+        } catch (error) {
+            dispatch(notesRequestFailed(error.message));
         }
-    } catch (error) {
-        dispatch(notesRequestFailed(error.message));
-    }
-};
+    };
 
 export const editData = (payload) => async (dispatch) => {
     dispatch(notesRequested());
     try {
         const { content } = await notesService.update(payload);
         if (typeof content === "object") {
-            toast.success("Note edit successful");
+            toast.success("Note edit successful", { autoClose: 2000 });
         }
         dispatch(editNote(payload));
     } catch (error) {
@@ -119,7 +122,7 @@ export const removeNote = (id) => async (dispatch) => {
     try {
         const { content } = await notesService.removeNote(id);
         if (content === null) {
-            toast.success("Note deleted successfully");
+            toast.success("Note deleted successfully", { autoClose: 2000 });
             dispatch(deleteNote({ id }));
         }
     } catch (error) {
