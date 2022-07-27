@@ -68,7 +68,6 @@ router.post("/signInWithPassword", [
                     .json({ error: { message: "INVALID_DATA", code: 400 } });
             }
             const { email, password } = req.body;
-
             const existingUser = await User.findOne({ email });
 
             if (!existingUser) {

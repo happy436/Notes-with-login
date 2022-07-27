@@ -13,7 +13,6 @@ function Modal({ active, setActive, activeNoteData, handleDelete }) {
     function onSubmit(e) {
         e.preventDefault();
         setActive(false);
-        console.log(data);
         dispatch(editData(data));
     }
     useEffect(() => {
@@ -60,7 +59,7 @@ function Modal({ active, setActive, activeNoteData, handleDelete }) {
                         <Button type="submit">
                             <Edit />
                         </Button>
-                        <Button handleClick={() => handleDelete()}>
+                        <Button handleClick={() => handleDelete(activeNoteData._id)}>
                             <Delete />
                         </Button>
                     </span>

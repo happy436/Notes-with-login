@@ -3,17 +3,14 @@ const notesEndpoint = "notes/";
 
 const notesService = {
     createNote: async (payload) => {
-        const { data } = await httpService.put(
-            notesEndpoint + payload._id,
-            payload
-        );
+        const { data } = await httpService.post(notesEndpoint, payload);
         return data;
     },
     getNotes: async (userId) => {
         const { data } = await httpService.get(notesEndpoint, {
             params: {
-                orderBy: '"userId"',
-                equalTo: `"${userId}"`
+                orderBy: "userId",
+                equalTo: `${userId}`
             }
         });
         return data;

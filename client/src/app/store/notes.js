@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import notesService from "../services/notes.service";
 import localStorageService from "../services/localStorage.service";
-import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 
 const notesSlice = createSlice({
@@ -72,15 +71,14 @@ export const loadNotesList = () => async (dispatch) => {
 };
 
 export const createNote = (data) => async (dispatch) => {
-    const note = {
+    /* const note = {
         ...data,
-        _id: nanoid(),
         created_at: Date.now(),
         userId: localStorageService.getUserId()
-    };
+    }; */
     dispatch(notesRequested());
     try {
-        const { content } = await notesService.createNote(note);
+        const { content } = await notesService.createNote(data);
         dispatch(addNote(content));
     } catch (error) {
         dispatch(notesRequestFailed(error.message));
@@ -121,7 +119,7 @@ export const removeNote = (id) => async (dispatch) => {
     dispatch(notesRequested());
     try {
         const { content } = await notesService.removeNote(id);
-        if (content === null) {
+        if (!content) {
             toast.success("Note deleted successfully", { autoClose: 2000 });
             dispatch(deleteNote({ id }));
         }

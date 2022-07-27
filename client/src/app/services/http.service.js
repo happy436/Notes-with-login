@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import configFile from "../config.dev.json";
+import configFile from "../config.json";
 import localStorageService from "./localStorage.service";
 import authService from "./auth.service";
 
@@ -10,26 +10,20 @@ const http = axios.create({
 
 http.interceptors.request.use(
     async function (config) {
-        if (configFile.isFireBase) {
-            const containSlash = /\/$/gi.test(config.url);
-            config.url =
-                (containSlash ? config.url.slice(0, -1) : config.url) + ".json";
-            const expiresDate = localStorageService.getTokenExpiresDate();
-            const refreshToken = localStorageService.getRefreshToken();
-            if (refreshToken && expiresDate < Date.now()) {
-                const data = await authService.refresh();
+        const expiresDate = localStorageService.getTokenExpiresDate();
+        const refreshToken = localStorageService.getRefreshToken();
 
-                localStorageService.setTokens({
-                    refreshToken: data.refresh_token,
-                    idToken: data.id_token,
-                    expiresIn: data.expires_id,
-                    localId: data.user_id
-                });
-            }
-            const accessToken = localStorageService.getAccessToken();
-            if (accessToken) {
-                config.params = { ...config.params, auth: accessToken };
-            }
+        if (refreshToken && expiresDate < Date.now()) {
+            const data = await authService.refresh();
+
+            localStorageService.setTokens(data);
+        }
+        const accessToken = localStorageService.getAccessToken();
+        if (accessToken) {
+            config.headers = {
+                ...config.headers,
+                Authorization: `Bearer ${accessToken}`
+            };
         }
         return config;
     },
@@ -49,6 +43,7 @@ http.interceptors.response.use(
         if (configFile.isFireBase) {
             res.data = { content: transformData(res.data) };
         }
+        res.data = { content: res.data };
         return res;
     },
     function (error) {
@@ -58,7 +53,6 @@ http.interceptors.response.use(
             error.response.status < 500;
 
         if (!expectedErrors) {
-            console.log(error);
             toast.error("Something was wrong. Try it later", {
                 autoClose: 2000
             });

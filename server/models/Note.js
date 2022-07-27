@@ -6,6 +6,10 @@ const schema = new Schema(
             type: String,
             required: true,
         },
+        cheched: {
+            type: Boolean,
+            required: true
+        },
         userId: {
             type: Schema.Types.ObjectId,
             ref: "User",
@@ -17,4 +21,4 @@ const schema = new Schema(
     }
 );
 
-module.exports = model("Comment", schema);
+module.exports = model("Notes", schema);

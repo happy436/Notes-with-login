@@ -12,7 +12,7 @@ import List from "./components/list";
 import "./content.css";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "./components/modal";
-import { toast } from "react-toastify";
+import AppLoader from "../../ui/hoc/appLoader";
 
 function Content() {
     const [inputLabelActive, setLabelActive] = useState(false);
@@ -28,14 +28,6 @@ function Content() {
         dispatch(createNote(data));
         dispatch(loadNotesList());
         setData({});
-        toast("🦄 Wow so easy!", {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-        });
     };
     const handleDelete = (id) => {
         setModalActive(false);
@@ -46,61 +38,63 @@ function Content() {
     };
     const list = useSelector(getNotes());
     return (
-        <main className="flex flex-col justify-center content-center items-center gap-y-5">
-            <section>
-                <form
-                    className="flex justify-center content-center items-center gap-x-2"
-                    onSubmit={(e) => handleSubmit(e)}
-                >
-                    <Button type="submit">
-                        <Save />
-                    </Button>
-                    <div className="input-container">
-                        <input
-                            onBlur={(e) =>
-                                e.target.value !== ""
-                                    ? setLabelActive(true)
-                                    : setLabelActive(false)
-                            }
-                            required
-                            placeholder="Enter text"
-                            className="rounded-xl pl-2 drop-shadow-lg text-input"
-                            autoComplete="off"
-                            name="note"
-                            value={data.note || ""}
-                            onChange={({ target }) => {
-                                setData(() => ({
-                                    [target.name]: target.value,
-                                    cheched: false
-                                }));
-                            }}
-                        />
-                        <label
-                            className={`label ${
-                                inputLabelActive ? "filled" : null
-                            }`}
-                            htmlFor="note"
-                        >
-                            Note text
-                        </label>
-                    </div>
-                </form>
-            </section>
-            <List
-                list={list}
-                onDelete={handleDelete}
-                activeModal={activeModal}
-                setModalActive={setModalActive}
-                setActiveNote={setActiveNote}
-                handleCheched={handleCheched}
-            />
-            <Modal
-                active={activeModal}
-                setActive={setModalActive}
-                activeNoteData={activeNote}
-                handleDelete={handleDelete}
-            />
-        </main>
+        <AppLoader>
+            <main className="flex flex-col justify-center content-center items-center gap-y-5">
+                <section>
+                    <form
+                        className="flex justify-center content-center items-center gap-x-2"
+                        onSubmit={(e) => handleSubmit(e)}
+                    >
+                        <Button type="submit">
+                            <Save />
+                        </Button>
+                        <div className="input-container">
+                            <input
+                                onBlur={(e) =>
+                                    e.target.value !== ""
+                                        ? setLabelActive(true)
+                                        : setLabelActive(false)
+                                }
+                                required
+                                placeholder="Enter text"
+                                className="rounded-xl pl-2 drop-shadow-lg text-input"
+                                autoComplete="off"
+                                name="note"
+                                value={data.note || ""}
+                                onChange={({ target }) => {
+                                    setData(() => ({
+                                        [target.name]: target.value,
+                                        cheched: false
+                                    }));
+                                }}
+                            />
+                            <label
+                                className={`label ${
+                                    inputLabelActive ? "filled" : null
+                                }`}
+                                htmlFor="note"
+                            >
+                                Note text
+                            </label>
+                        </div>
+                    </form>
+                </section>
+                <List
+                    list={list}
+                    onDelete={handleDelete}
+                    activeModal={activeModal}
+                    setModalActive={setModalActive}
+                    setActiveNote={setActiveNote}
+                    handleCheched={handleCheched}
+                />
+                <Modal
+                    active={activeModal}
+                    setActive={setModalActive}
+                    activeNoteData={activeNote}
+                    handleDelete={handleDelete}
+                />
+            </main>
+        </AppLoader>
     );
 }
 
