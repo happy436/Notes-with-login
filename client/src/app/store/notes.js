@@ -38,12 +38,14 @@ const notesSlice = createSlice({
                 (c) => c._id === action.payload._id
             );
             state.entities[index].note = action.payload.note;
+            state.isLoading = false;
         },
         editChechedStatusNote: (state, action) => {
             const index = state.entities.findIndex(
                 (c) => c._id === action.payload
             );
             state.entities[index].cheched = !state.entities[index].cheched;
+            state.isLoading = false;
         }
     }
 });

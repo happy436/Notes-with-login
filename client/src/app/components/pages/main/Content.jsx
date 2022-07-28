@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     createNote,
     getNotes,
@@ -20,9 +20,6 @@ function Content() {
     const [activeNote, setActiveNote] = useState({ note: "" });
     const [activeModal, setModalActive] = useState(false);
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(loadNotesList());
-    }, []);
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createNote(data));
@@ -38,47 +35,47 @@ function Content() {
     };
     const list = useSelector(getNotes());
     return (
-        <AppLoader>
-            <main className="flex flex-col justify-center content-center items-center gap-y-5">
-                <section>
-                    <form
-                        className="flex justify-center content-center items-center gap-x-2"
-                        onSubmit={(e) => handleSubmit(e)}
-                    >
-                        <Button type="submit">
-                            <Save />
-                        </Button>
-                        <div className="input-container">
-                            <input
-                                onBlur={(e) =>
-                                    e.target.value !== ""
-                                        ? setLabelActive(true)
-                                        : setLabelActive(false)
-                                }
-                                required
-                                placeholder="Enter text"
-                                className="rounded-xl pl-2 drop-shadow-lg text-input"
-                                autoComplete="off"
-                                name="note"
-                                value={data.note || ""}
-                                onChange={({ target }) => {
-                                    setData(() => ({
-                                        [target.name]: target.value,
-                                        cheched: false
-                                    }));
-                                }}
-                            />
-                            <label
-                                className={`label ${
-                                    inputLabelActive ? "filled" : null
-                                }`}
-                                htmlFor="note"
-                            >
-                                Note text
-                            </label>
-                        </div>
-                    </form>
-                </section>
+        <main className="flex flex-col justify-center content-center items-center gap-y-5">
+            <section>
+                <form
+                    className="flex justify-center content-center items-center gap-x-2"
+                    onSubmit={(e) => handleSubmit(e)}
+                >
+                    <Button type="submit" className={"animate-bounce"}>
+                        <Save />
+                    </Button>
+                    <div className="input-container">
+                        <input
+                            onBlur={(e) =>
+                                e.target.value !== ""
+                                    ? setLabelActive(true)
+                                    : setLabelActive(false)
+                            }
+                            required
+                            placeholder="Enter text"
+                            className="rounded-xl pl-2 drop-shadow-lg text-input"
+                            autoComplete="off"
+                            name="note"
+                            value={data.note || ""}
+                            onChange={({ target }) => {
+                                setData(() => ({
+                                    [target.name]: target.value,
+                                    cheched: false
+                                }));
+                            }}
+                        />
+                        <label
+                            className={`label ${
+                                inputLabelActive ? "filled" : null
+                            }`}
+                            htmlFor="note"
+                        >
+                            Note text
+                        </label>
+                    </div>
+                </form>
+            </section>
+            <AppLoader>
                 <List
                     list={list}
                     onDelete={handleDelete}
@@ -93,8 +90,8 @@ function Content() {
                     activeNoteData={activeNote}
                     handleDelete={handleDelete}
                 />
-            </main>
-        </AppLoader>
+            </AppLoader>
+        </main>
     );
 }
 

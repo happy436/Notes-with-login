@@ -1,25 +1,41 @@
-.note__buttons-hover{
+.note__buttons-hover {
     opacity: 0;
 }
 
-.note:hover .note__buttons-hover{
-    opacity:100;
-    transition: .5s;
+.note:hover .note__buttons-hover {
+    opacity: 100;
+    transition: 0.5s;
 }
 
-.input-container{
+.input-container {
     /* width: 1px; */
     position: relative;
 }
 
-.label{
+.note {
+    transition: all 0.3s;
+    animation: scale 0.7s ease-in-out;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.label {
     position: absolute;
     left: 10px;
     top: 14px;
-    transition: all .2s;
+    transition: all 0.2s;
     padding: 0 2px;
-    z-index:1;
-    color:#b3b3b3;
+    z-index: 1;
+    color: #b3b3b3;
 }
 
 .text-input {
@@ -31,11 +47,11 @@
     border-radius: 5px;
     font-size: 18px;
     outline: none;
-    transition: all .3s;
+    transition: all 0.3s;
     color: #fff;
 }
 
-.label::before{
+.label::before {
     content: "";
     height: 5px;
     background: rgb(76 29 149);
@@ -46,28 +62,29 @@
     z-index: -1;
 }
 
-.text-input:focus{
+.text-input:focus {
     border: 2px solid #7e4ccb;
 }
 
-.text-input:focus + label, .filled{
-    top:-10px;
-    color:#7e4ccb;
+.text-input:focus + label,
+.filled {
+    top: -10px;
+    color: #7e4ccb;
     font-size: 14px;
 }
 
-.text-input::placeholder{
+.text-input::placeholder {
     font-size: 16px;
     opacity: 0;
     transition: all 0.3s;
 }
 
-.text-input:focus::placeholder{
+.text-input:focus::placeholder {
     opacity: 1;
 }
 
-@media (max-width:768px){
-    .note__buttons-hover{
+@media (max-width: 768px) {
+    .note__buttons-hover {
         opacity: 100;
     }
 }

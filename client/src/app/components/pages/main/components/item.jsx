@@ -13,7 +13,7 @@ function Item({ data, onDelete, setModalActive, setActiveNote, onToggleCheched }
     return (
         <>
             <li
-                className={`min-w-[200px] ${
+                className={`min-w-[200px] note ${
                     data.cheched ? "bg-violet-700" : "bg-violet-400"
                 } p-2 rounded-xl drop-shadow-lg note cursor-pointer truncate`}
                 onClick={() => {
