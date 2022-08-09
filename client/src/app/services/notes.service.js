@@ -1,5 +1,5 @@
 import httpService from "./http.service";
-const notesEndpoint = "notes/";
+const notesEndpoint = "note/";
 
 const notesService = {
     createNote: async (payload) => {
