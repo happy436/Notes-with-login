@@ -7,14 +7,14 @@ function List({
     onDelete,
     setModalActive,
     setActiveNote,
-    handleCheched
+    handleChecked
 }) {
     const sortedList =
         list !== null
             ? list
                 .map((item) => item)
                 .sort((a, b) => a.note.length - b.note.length)
-                .sort((a, b) => Number(a.cheched) - Number(b.cheched))
+                .sort((a, b) => Number(a.checked) - Number(b.checked))
             : null;
     return (
         <ul className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4">
@@ -27,7 +27,7 @@ function List({
                         onDelete={onDelete}
                         setModalActive={setModalActive}
                         setActiveNote={setActiveNote}
-                        onToggleCheched={handleCheched}
+                        onToggleChecked={handleChecked}
                     />
                 ))}
         </ul>
@@ -40,7 +40,7 @@ List.propTypes = {
     activeModal: PropTypes.bool,
     setModalActive: PropTypes.func,
     setActiveNote: PropTypes.func,
-    handleCheched: PropTypes.func
+    handleChecked: PropTypes.func
 };
 
 export default List;

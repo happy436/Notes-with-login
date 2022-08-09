@@ -48,10 +48,10 @@ router.delete("/:noteId", auth, async (req, res) => {
 router.patch("/:noteId", auth, async (req, res) => {
 	try {
 		const { noteId } = req.params;
-        const updatedNote = await Note.findByIdAndUpdate(noteId, req.body, {
-            new: true,
-        });
-        res.send(updatedNote);
+		const updatedNote = await Note.findByIdAndUpdate(noteId, req.body, {
+			new: true,
+		});
+		res.send(updatedNote);
 	} catch (error) {
 		res.status(500).json({
 			message: "Error occurred on the server. Please try again later",

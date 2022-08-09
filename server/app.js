@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const config = require("config");
 const chalk = require("chalk");
-const router = require("./routes")
+const router = require("./routes");
 const cors = require("cors");
 
 const app = express();
@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use("/api", router)
+app.use("/api", router);
 
 const PORT = config.get("port") ?? 8080;
 
@@ -20,14 +20,14 @@ const PORT = config.get("port") ?? 8080;
 	console.log("development");
 } */
 
-if (process.env.NODE_ENV === 'production') {
-    app.use('/', express.static(path.join(__dirname, "client")))
+if (process.env.NODE_ENV === "production") {
+	app.use("/", express.static(path.join(__dirname, "client")));
 
-    const indexPath = path.join(__dirname, "client", "index.html")
+	const indexPath = path.join(__dirname, "client", "index.html");
 
-    app.get("*", (req,res) => {
-        res.sendFile(indexPath)
-    })
+	app.get("*", (req, res) => {
+		res.sendFile(indexPath);
+	});
 }
 
 async function start() {
@@ -45,6 +45,4 @@ async function start() {
 	}
 }
 
-start()
-
-
+start();

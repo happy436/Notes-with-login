@@ -4,7 +4,7 @@ import Button from "../../../common/buttons/button";
 import Edit from "../../../common/buttons/edit";
 import Delete from "../../../common/buttons/delete";
 
-function Item({ data, onDelete, setModalActive, setActiveNote, onToggleCheched }) {
+function Item({ data, onDelete, setModalActive, setActiveNote, onToggleChecked }) {
     const handleActiveModal = () => {
         setModalActive(true);
         setActiveNote({ note: data.note, ...data });
@@ -14,7 +14,7 @@ function Item({ data, onDelete, setModalActive, setActiveNote, onToggleCheched }
         <>
             <li
                 className={`min-w-[200px] note ${
-                    data.cheched ? "bg-violet-700" : "bg-violet-400"
+                    data.checked ? "bg-violet-700" : "bg-violet-400"
                 } p-2 rounded-xl drop-shadow-lg note cursor-pointer truncate`}
                 onClick={() => {
                     handleActiveModal();
@@ -26,7 +26,7 @@ function Item({ data, onDelete, setModalActive, setActiveNote, onToggleCheched }
                         className="w-[20px] h-[20px]"
                         onClick={(e) => {
                             e.stopPropagation();
-                            onToggleCheched(data._id);
+                            onToggleChecked(data._id);
                         }}
                     />
                     <span className="flex gap-2">
@@ -44,7 +44,7 @@ function Item({ data, onDelete, setModalActive, setActiveNote, onToggleCheched }
                 </span>
                 <span
                     className={`break-words ${
-                        data.cheched ? "line-through" : null
+                        data.checked ? "line-through" : null
                     }`}
                 >
                     {data.note}
@@ -59,7 +59,7 @@ Item.propTypes = {
     onDelete: PropTypes.func,
     setModalActive: PropTypes.func,
     setActiveNote: PropTypes.func,
-    onToggleCheched: PropTypes.func
+    onToggleChecked: PropTypes.func
 };
 
 export default Item;

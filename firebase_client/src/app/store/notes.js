@@ -41,11 +41,11 @@ const notesSlice = createSlice({
             state.entities[index].note = action.payload.note;
             state.isLoading = false;
         },
-        editChechedStatusNote: (state, action) => {
+        editCheckedStatusNote: (state, action) => {
             const index = state.entities.findIndex(
                 (c) => c._id === action.payload
             );
-            state.entities[index].cheched = !state.entities[index].cheched;
+            state.entities[index].checked = !state.entities[index].checked;
             state.isLoading = false;
         }
     }
@@ -59,7 +59,7 @@ const {
     addNote,
     deleteNote,
     editNote,
-    editChechedStatusNote
+    editCheckedStatusNote
 } = actions;
 
 export const loadNotesList = () => async (dispatch) => {
@@ -89,15 +89,15 @@ export const createNote = (data) => async (dispatch) => {
     }
 };
 
-export const toggleChechedNoteStatus =
+export const toggleCheckedNoteStatus =
     (payload) => async (dispatch, getState) => {
         dispatch(notesRequested());
         try {
-            dispatch(editChechedStatusNote(payload));
-            const cheched = getState().notes.entities.find(
+            dispatch(editCheckedStatusNote(payload));
+            const checked = getState().notes.entities.find(
                 (item) => item._id === payload
             );
-            const { content } = await notesService.update(cheched);
+            const { content } = await notesService.update(checked);
             if (typeof content !== "object") {
                 return null;
             }

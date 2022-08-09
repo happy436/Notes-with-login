@@ -4,7 +4,7 @@ import {
     getNotes,
     loadNotesList,
     removeNote,
-    toggleChechedNoteStatus
+    toggleCheckedNoteStatus
 } from "../../../store/notes";
 import Button from "../../common/buttons/button";
 import Save from "../../common/buttons/save";
@@ -30,8 +30,8 @@ function Content() {
         setModalActive(false);
         dispatch(removeNote(id));
     };
-    const handleCheched = (id) => {
-        dispatch(toggleChechedNoteStatus(id));
+    const handleChecked = (id) => {
+        dispatch(toggleCheckedNoteStatus(id));
     };
     const list = useSelector(getNotes());
     return (
@@ -60,7 +60,7 @@ function Content() {
                             onChange={({ target }) => {
                                 setData(() => ({
                                     [target.name]: target.value,
-                                    cheched: false
+                                    checked: false
                                 }));
                             }}
                         />
@@ -82,7 +82,7 @@ function Content() {
                     activeModal={activeModal}
                     setModalActive={setModalActive}
                     setActiveNote={setActiveNote}
-                    handleCheched={handleCheched}
+                    handleChecked={handleChecked}
                 />
                 <Modal
                     active={activeModal}
