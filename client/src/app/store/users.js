@@ -73,13 +73,10 @@ const {
     usersRequestFailed,
     authRequestSuccess,
     authRequestFailed,
-    userLoggedOut,
-    userUpdateSuccessed
+    userLoggedOut
 } = actions;
 
 const authRequested = createAction("users/authRequested");
-const userUpdateRequested = createAction("users/userUpdateRequested");
-const userUpdateFailed = createAction("users/userUpdateFailed");
 
 export const logIn =
     ({ payload, redirect }) =>
@@ -122,37 +119,7 @@ export const logOut = () => (dispatch) => {
     history.push("/");
 };
 
-export const loadUsersList = () => async (dispatch, getState) => {
-    dispatch(usersRequested());
-    try {
-        const { content } = await userService.get();
-        dispatch(usersReceived(content));
-    } catch (error) {
-        dispatch(usersRequestFailed(error.message));
-    }
-};
-export const updateUserData = (payload) => async (dispatch) => {
-    dispatch(userUpdateRequested());
-    try {
-        const { content } = await userService.update(payload);
-        dispatch(userUpdateSuccessed(content));
-        history.push(`/users/${content._id}`);
-    } catch (error) {
-        dispatch(userUpdateFailed(error.message));
-    }
-};
-
 export const getUsersList = () => (state) => state.users.entities;
-export const getCurrentUserData = () => (state) => {
-    return state.users.entities
-        ? state.users.entities.find((u) => u._id === state.users.auth.userId)
-        : null;
-};
-export const getUserById = (userId) => (state) => {
-    if (state.users.entities) {
-        return state.users.entities.find((u) => u._id === userId);
-    }
-};
 
 export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
 export const getDataStatus = () => (state) => state.users.dataLoaded;

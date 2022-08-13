@@ -30,33 +30,31 @@ router
             });
         }
     });
-
-router.delete("/:noteId", auth, async (req, res) => {
-    try {
-        const { noteId } = req.params;
-        const removedComment = await Note.findById(noteId);
-        console.log(removedComment);
-        await removedComment.remove();
-        return res.send(null);
-    } catch (error) {
-        res.status(500).json({
-            message: "Error occurred on the server. Please try again later"
-        });
-    }
-});
-
-router.patch("/:noteId", auth, async (req, res) => {
-    try {
-        const { noteId } = req.params;
-        const updatedNote = await Note.findByIdAndUpdate(noteId, req.body, {
-            new: true
-        });
-        res.send(updatedNote);
-    } catch (error) {
-        res.status(500).json({
-            message: "Error occurred on the server. Please try again later"
-        });
-    }
-});
+router
+    .route("/:noteId")
+    .delete(auth, async (req, res) => {
+        try {
+            const { noteId } = req.params;
+            await Note.findByIdAndRemove(noteId);
+            return res.send(null);
+        } catch (error) {
+            res.status(500).json({
+                message: "Error occurred on the server. Please try again later"
+            });
+        }
+    })
+    .patch(auth, async (req, res) => {
+        try {
+            const { noteId } = req.params;
+            const updatedNote = await Note.findByIdAndUpdate(noteId, req.body, {
+                new: true
+            });
+            res.send(updatedNote);
+        } catch (error) {
+            res.status(500).json({
+                message: "Error occurred on the server. Please try again later"
+            });
+        }
+    });
 
 module.exports = router;

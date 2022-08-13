@@ -16,6 +16,7 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <Router history={history}>
+                <h1 className="hidden">Note app</h1>
                 <App />
             </Router>
             <ToastContainer />

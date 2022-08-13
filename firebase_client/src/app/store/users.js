@@ -84,7 +84,9 @@ const createUserFailed = createAction("users/createUserFailed");
 const userUpdateRequested = createAction("users/userUpdateRequested");
 const userUpdateFailed = createAction("users/userUpdateFailed");
 
-export const logIn = ({ payload, redirect }) => async (dispatch) => {
+export const logIn =
+    ({ payload, redirect }) =>
+    async (dispatch) => {
         const { email, password } = payload;
         dispatch(authRequested());
         try {
@@ -133,7 +135,7 @@ function createUser(payload) {
         try {
             const { content } = await userService.create(payload);
             dispatch(userCreated(content));
-            history.push("/users");
+            history.push("/");
         } catch (error) {
             dispatch(createUserFailed(error.message));
         }

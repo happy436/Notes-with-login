@@ -4,7 +4,6 @@ import TextField from "../common/form/textField";
 import { useHistory } from "react-router-dom";
 import { getAuthErrors, logIn } from "../../store/users";
 import { useDispatch, useSelector } from "react-redux";
-import CheckBoxField from "./../common/form/checkBoxField";
 import { toast } from "react-toastify";
 
 const LoginForm = () => {
@@ -66,6 +65,7 @@ const LoginForm = () => {
                 value={data.email}
                 onChange={handleChange}
                 error={errors.email}
+                autoComplete="off"
             />
             <TextField
                 label="Password"
@@ -75,13 +75,13 @@ const LoginForm = () => {
                 onChange={handleChange}
                 error={errors.password}
             />
-            <CheckBoxField
+            {/* <CheckBoxField
                 value={data.stayOn}
                 onChange={handleChange}
                 name="stayOn"
             >
                 Stay on
-            </CheckBoxField>
+            </CheckBoxField> */}
             <button
                 className="btn bg-violet-400 hover:bg-violet-700 w-100 mx-auto"
                 type="submit"

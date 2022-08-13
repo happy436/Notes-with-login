@@ -69,10 +69,7 @@ const RegisterForm = () => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        const newData = {
-            ...data
-        };
-        dispatch(signUp(newData));
+        dispatch(signUp(data));
         if (authInError) {
             toast.error(authInError, { autoClose: 2000 });
         }

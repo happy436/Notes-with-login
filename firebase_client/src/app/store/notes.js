@@ -1,7 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 import notesService from "../services/notes.service";
 import localStorageService from "../services/localStorage.service";
-import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 
 const notesSlice = createSlice({
@@ -38,7 +37,7 @@ const notesSlice = createSlice({
             const index = state.entities.findIndex(
                 (c) => c._id === action.payload._id
             );
-            state.entities[index].note = action.payload.note;
+            state.entities[index] = action.payload;
             state.isLoading = false;
         },
         editCheckedStatusNote: (state, action) => {
@@ -123,7 +122,7 @@ export const removeNote = (id) => async (dispatch) => {
     dispatch(notesRequested());
     try {
         const { content } = await notesService.removeNote(id);
-        if (content === null) {
+        if (!content) {
             toast.success("Note deleted successfully", { autoClose: 2000 });
             dispatch(deleteNote({ id }));
         }
@@ -134,5 +133,10 @@ export const removeNote = (id) => async (dispatch) => {
 
 export const getNotes = () => (state) => state.notes.entities;
 export const getNotesLoadingStatus = () => (state) => state.notes.isLoading;
+export const getNoteById = (id) => (state) => {
+    if (state.notes.entities) {
+        return state.notes.entities.find((n) => n._id === id);
+    }
+};
 
 export default notesReducer;

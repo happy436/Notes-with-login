@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Edit from "../../../common/buttons/accept";
-import Button from "../../../common/buttons/button";
-import Delete from "../../../common/buttons/delete";
-import Cancel from "../../../common/buttons/cancel-x";
+import Edit from "../../../common/icon/accept";
+import Button from "../../../common/button";
+import Delete from "../../../common/icon/delete";
+import Cancel from "../../../common/icon/cancel-x";
 import { useDispatch } from "react-redux";
 import { editData } from "./../../../../store/notes";
 
