@@ -7,6 +7,7 @@ Server:
  - Docker
  - Node.js
  - Express
+  
 Client:
  - React
  - React-redux
@@ -22,5 +23,6 @@ Client:
  - tailwind
  - react-toastify
  - axios
+
 Server:
  - Firebase
