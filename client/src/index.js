@@ -5,7 +5,7 @@ import "./index.css";
 import { Router } from "react-router-dom";
 import { createStore } from "./app/store/createStore";
 import history from "./app/utils/history";
-import App from "./app/App";
+import App from "./app/app";
 import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
